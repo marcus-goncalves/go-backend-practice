@@ -1,0 +1,22 @@
+FROM golang:1.18-alpine3.16
+
+WORKDIR /practice-golang
+
+COPY ./go.mod ./
+COPY ./go.sum ./
+
+RUN go mod download
+
+COPY * ./
+
+ENV MONGO_DATABASE = ""
+ENV MONGO_USER = ""
+ENV MONGO_PWD = "*"
+ENV MONGO_HOST = ""
+ENV MONGO_PORT = ""
+
+RUN go build -o /pratice-golang-app
+
+EXPOSE 8000
+
+CMD ["/pratice-golang-app"]
